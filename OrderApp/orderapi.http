@@ -1,4 +1,4 @@
-PUT http://localhost:5000/api/orders/124
+PUT http://localhost:5000/orders/124
 Content-type: application/json
 
 {
@@ -9,4 +9,16 @@ Content-type: application/json
 
 #####
 
-GET  http://localhost:5000/api/orders/123
+GET  http://localhost:5000/orders/123
+
+
+######
+
+POST http://localhost:5000/orders
+Content-type: application/json
+
+{
+    "id" : 555,
+    "customerId": "customer123",
+    "shippingDate": "2020-02-18"
+}

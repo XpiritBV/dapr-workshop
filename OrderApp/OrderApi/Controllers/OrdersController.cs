@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.Model;
-using Microsoft.Extensions.Http;
 using Newtonsoft.Json;
+using OrderApp.Model;
 
 namespace OrderApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class OrdersController : ControllerBase
     {
@@ -27,6 +27,7 @@ namespace OrderApi.Controllers
 
             _stateClient = new HttpClient();
         }
+
         // GET: api/Orders/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
@@ -63,6 +64,22 @@ namespace OrderApi.Controllers
 
             OrderState state = new OrderState();
             state.Key = $"order-{id}";
+
+            state.Value = order;
+            List<OrderState> stateList = new List<OrderState>();
+            stateList.Add(state);
+
+            var result = await _stateClient.PostAsJsonAsync(_stateStoreUrl, stateList);
+
+            return order;
+        }
+
+        // POST: api/Orders
+        [HttpPost()]
+        public async Task<ActionResult<Order>> PostOrder(Order order)
+        {
+            OrderState state = new OrderState();
+            state.Key = $"order-{order.Id}";
 
             state.Value = order;
             List<OrderState> stateList = new List<OrderState>();
