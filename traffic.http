@@ -1,0 +1,9 @@
+GET http://51.145.187.29/FrontEnd/serviceA
+
+###
+
+GET http://51.145.187.29/FrontEnd/serviceB
+
+###
+
+GET http://51.145.187.29/FrontEnd/serviceC

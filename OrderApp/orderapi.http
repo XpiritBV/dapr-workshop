@@ -1,0 +1,12 @@
+PUT http://localhost:5000/api/orders/124
+Content-type: application/json
+
+{
+    "id" : 124,
+    "customerId": "customer123",
+    "shippingDate": "2020-02-18"
+}
+
+#####
+
+GET  http://localhost:5000/api/orders/123
