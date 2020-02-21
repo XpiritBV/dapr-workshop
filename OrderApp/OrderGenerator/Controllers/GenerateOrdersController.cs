@@ -21,7 +21,7 @@ namespace OrderGenerator.Controllers
         public GenerateOrdersController()
         {
             _daprPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
-            _invokeServiceUrl = $"http://localhost:3500/v1.0/invoke/orderapi/method/Orders";
+            _invokeServiceUrl = $"http://localhost:3500/v1.0/invoke/orderapp/method/orders";
 
             _serviceInvokeClient = new HttpClient();
         }
@@ -34,7 +34,7 @@ namespace OrderGenerator.Controllers
             for (int i = 1; i <= number; i++)
             {
                 Order order = new Order() { Id = i, CustomerId = "Dapr", ShippingDate = DateTime.Now };
-                var result = await _serviceInvokeClient.PostAsJsonAsync($"{_invokeServiceUrl}", order);
+                var result = await _serviceInvokeClient.PutAsJsonAsync($"{_invokeServiceUrl}/{i}", order);
                 Console.WriteLine($"Created order. status: {result.StatusCode}");
                 orders.Add(order);
             }

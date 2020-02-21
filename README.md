@@ -21,3 +21,14 @@ ln -sf /c/users/<YOUR_USER>/.kube/config ~/.kube/config
 installing Dapr
 
 https://github.com/dapr/docs/blob/master/getting-started/environment-setup.md#installing-dapr-on-a-kubernetes-cluster
+
+
+running order apps
+
+```
+C:\src\github\xpiritbv\dapr-workshop\OrderApp\OrderApi> dapr run --app-id orderapp --app-port 5000 --port 3500 dotnet run
+```
+
+```
+dapr run --app-id ordergenerator --app-port 8180 dotnet run
+```

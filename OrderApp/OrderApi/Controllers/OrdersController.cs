@@ -28,7 +28,7 @@ namespace OrderApi.Controllers
             _stateClient = new HttpClient();
         }
 
-        // GET: api/Orders/5
+        // GET: Orders/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrder(int id)
         {
@@ -53,7 +53,7 @@ namespace OrderApi.Controllers
         }
 
 
-        // PUT: api/Orders/id
+        // PUT: Orders/id
         [HttpPut("{id}")]
         public async Task<ActionResult<Order>> PutOrder(int id, Order order)
         {
@@ -74,7 +74,7 @@ namespace OrderApi.Controllers
             return order;
         }
 
-        // POST: api/Orders
+        // POST: Orders
         [HttpPost()]
         public async Task<ActionResult<Order>> PostOrder(Order order)
         {
