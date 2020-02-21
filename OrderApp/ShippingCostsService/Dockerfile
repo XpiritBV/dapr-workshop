@@ -7,17 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["OrderGenerator/OrderGenerator.csproj", "OrderGenerator/"]
-COPY ["Order.Model/Order.Model.csproj", "Order.Model/"]
-RUN dotnet restore "OrderGenerator/OrderGenerator.csproj"
+COPY ["ShippingCostsService/ShippingCostsService.csproj", "ShippingCostsService/"]
+RUN dotnet restore "ShippingCostsService/ShippingCostsService.csproj"
 COPY . .
-WORKDIR "/src/OrderGenerator"
-RUN dotnet build "OrderGenerator.csproj" -c Release -o /app/build
+WORKDIR "/src/ShippingCostsService"
+RUN dotnet build "ShippingCostsService.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "OrderGenerator.csproj" -c Release -o /app/publish
+RUN dotnet publish "ShippingCostsService.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "OrderGenerator.dll"]
+ENTRYPOINT ["dotnet", "ShippingCostsService.dll"]

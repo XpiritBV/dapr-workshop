@@ -7,11 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["OrderGenerator/OrderGenerator.csproj", "OrderGenerator/"]
-COPY ["Order.Model/Order.Model.csproj", "Order.Model/"]
-RUN dotnet restore "OrderGenerator/OrderGenerator.csproj"
+COPY ["OrderGenerator.csproj", ""]
+RUN dotnet restore "./OrderGenerator.csproj"
 COPY . .
-WORKDIR "/src/OrderGenerator"
+WORKDIR "/src/."
 RUN dotnet build "OrderGenerator.csproj" -c Release -o /app/build
 
 FROM build AS publish
