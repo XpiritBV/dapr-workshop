@@ -20,9 +20,9 @@ jobs:
 
     - name: Build & Push the Docker image
       run: |
-        docker build OrderApp `
-                     -f OrderApp/ShippingCostsService/Dockerfile `
-                     -t dapr-demo-shippingcostsservice:$GITHUB_RUN_ID `
+        docker build OrderApp \
+                     -f OrderApp/ShippingCostsService/Dockerfile \
+                     -t dapr-demo-shippingcostsservice:$GITHUB_RUN_ID \
                      -t dapr-demo-shippingcostsservice:latest
         docker push dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
       
