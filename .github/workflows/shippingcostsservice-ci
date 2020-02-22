@@ -1,0 +1,25 @@
+name: shippingcostsservice
+
+on:
+  push:
+    paths: 
+    - 'OrderApp/ShippingCostsService/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Docker Login
+      uses: Azure/docker-login@v1
+      with:
+        username: $DOCKERUSER
+        password: $DOCKERPW
+
+    - name: Build & Push the Docker image
+      run: |
+        docker build OrderApp/ShippingCostsService --file OrderApp/ShippingCostsService/Dockerfile --tag dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
+        docker --tag dapr-demo-shippingcostsservice:$GITHUB_RUN_ID dapr-demo-shippingcostsservice:latest
+        docker push dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
+      
