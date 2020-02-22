@@ -1,7 +1,7 @@
-name: shippingcostsservice
+name: ci
 
-on:
-  push:
+on: [push]
+  #push:
     #paths: 
     #- 'OrderApp/ShippingCostsService/**'
 
