@@ -1,9 +1,9 @@
 name: shippingcostsservice-ci
 
-on: [push]
-  #push:
-    #paths: 
-    #- 'OrderApp/ShippingCostsService/**'
+on:
+  push:
+    paths: 
+    - 'OrderApp/ShippingCostsService/**'
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
 
     - name: Build & Push the Docker image
       run: |
-        docker build OrderApp/ShippingCostsService --file OrderApp/ShippingCostsService/Dockerfile --tag dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
+        docker build OrderApp --file OrderApp/ShippingCostsService/Dockerfile --tag dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
         docker --tag dapr-demo-shippingcostsservice:$GITHUB_RUN_ID dapr-demo-shippingcostsservice:latest
         docker push dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
       
