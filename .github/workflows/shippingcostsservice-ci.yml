@@ -22,7 +22,7 @@ jobs:
       run: |
         docker build OrderApp \
                      -f OrderApp/ShippingCostsService/Dockerfile \
-                     -t dapr-demo-shippingcostsservice:$GITHUB_RUN_ID \
-                     -t dapr-demo-shippingcostsservice:latest
+                     -t xpiritbv/dapr-demo-shippingcostsservice:$GITHUB_RUN_ID \
+                     -t xpiritbv/dapr-demo-shippingcostsservice:latest
         docker push dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
       
