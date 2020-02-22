@@ -2,8 +2,8 @@ name: shippingcostsservice
 
 on:
   push:
-    paths: 
-    - 'OrderApp/ShippingCostsService/**'
+    #paths: 
+    #- 'OrderApp/ShippingCostsService/**'
 
 jobs:
   build:
