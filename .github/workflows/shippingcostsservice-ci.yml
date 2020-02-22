@@ -1,4 +1,4 @@
-name: ci
+name: shippingcostsservice-ci
 
 on: [push]
   #push:
