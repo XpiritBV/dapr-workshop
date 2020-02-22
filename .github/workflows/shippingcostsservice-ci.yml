@@ -4,6 +4,7 @@ on:
   push:
     paths: 
     - 'OrderApp/ShippingCostsService/**'
+    - '.github/workflows/shippingcostsservice-ci.yml'
 
 jobs:
   build:
@@ -19,7 +20,9 @@ jobs:
 
     - name: Build & Push the Docker image
       run: |
-        docker build OrderApp --file OrderApp/ShippingCostsService/Dockerfile --tag dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
-        docker --tag dapr-demo-shippingcostsservice:$GITHUB_RUN_ID dapr-demo-shippingcostsservice:latest
+        docker build OrderApp `
+                     -f OrderApp/ShippingCostsService/Dockerfile `
+                     -t dapr-demo-shippingcostsservice:$GITHUB_RUN_ID `
+                     -t dapr-demo-shippingcostsservice:latest
         docker push dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
       
