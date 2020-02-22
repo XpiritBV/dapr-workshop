@@ -17,15 +17,20 @@ namespace OrderApi.Controllers
     {
         private string _daprPort;
         private string _stateStoreUrl;
+        private string _loyaltyUrl;
+        private string _shippingCostsServiceUrl;
         private string _stateStoreName = "statestore";
-        HttpClient _stateClient;
+        HttpClient _httpClient;
 
         public OrdersController()
         {
             _daprPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
             _stateStoreUrl = $"http://localhost:{_daprPort}/v1.0/state/{_stateStoreName}";
 
-            _stateClient = new HttpClient();
+            _loyaltyUrl = $"http://localhost:{_daprPort}/v1.0/invoke/shippingcostsservice/method/shippingcosts";
+            _shippingCostsServiceUrl = $"http://localhost:{_daprPort}/v1.0/invoke/shippingcostsservice/method/shippingcosts";
+
+            _httpClient = new HttpClient();
         }
 
         // GET: Orders/5
@@ -34,7 +39,7 @@ namespace OrderApi.Controllers
         {
             try
             {
-                var order = JsonConvert.DeserializeObject<Order>(await _stateClient.GetStringAsync($"{ _stateStoreUrl}/order-{id}"));
+                var order = JsonConvert.DeserializeObject<Order>(await _httpClient.GetStringAsync($"{ _stateStoreUrl}/order-{id}"));
 
 
                 if (order == null)
@@ -69,23 +74,16 @@ namespace OrderApi.Controllers
             List<OrderState> stateList = new List<OrderState>();
             stateList.Add(state);
 
-            var result = await _stateClient.PostAsJsonAsync(_stateStoreUrl, stateList);
+            if (order.LoyaltyBonus)
+            {
+                //call loyalty service to add loyalty bonus
+                var loyalty = await _httpClient.PostAsJsonAsync(_loyaltyUrl, order);
+            }
 
-            return order;
-        }
+            var shippingCostResult = await _httpClient.GetStringAsync($"{_shippingCostsServiceUrl}/{order.Id}");
+            order.ShippingCosts = double.Parse(shippingCostResult);
 
-        // POST: Orders
-        [HttpPost()]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
-        {
-            OrderState state = new OrderState();
-            state.Key = $"order-{order.Id}";
-
-            state.Value = order;
-            List<OrderState> stateList = new List<OrderState>();
-            stateList.Add(state);
-
-            var result = await _stateClient.PostAsJsonAsync(_stateStoreUrl, stateList);
+            var result = await _httpClient.PostAsJsonAsync(_stateStoreUrl, stateList);
 
             return order;
         }

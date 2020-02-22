@@ -16,5 +16,9 @@ namespace OrderApp.Model
 
         [JsonProperty("shippingDate")]
         public DateTime ShippingDate { get; set; }
+
+        public bool LoyaltyBonus { get; set; }
+
+        public double ShippingCosts { get; set; }
     }
 }
