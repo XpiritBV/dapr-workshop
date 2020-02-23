@@ -25,4 +25,5 @@ jobs:
                      -t xpiritbv/dapr-demo-shippingcostsservice:$GITHUB_RUN_ID \
                      -t xpiritbv/dapr-demo-shippingcostsservice:latest
         docker push xpiritbv/dapr-demo-shippingcostsservice:$GITHUB_RUN_ID
+        docker push xpiritbv/dapr-demo-shippingcostsservice:latest
       

@@ -1,0 +1,29 @@
+name: orderapi-ci
+
+on:
+  push:
+    paths: 
+    - 'OrderApp/OrderApi/**'
+    - '.github/workflows/orderapi-ci.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Docker Login
+      uses: Azure/docker-login@v1
+      with:
+        username: ${{ secrets.DOCKERUSER }}
+        password: ${{ secrets.DOCKERPW }}
+
+    - name: Build & Push the Docker image
+      run: |
+        docker build OrderApp \
+                     -f OrderApp/OrderApi/Dockerfile \
+                     -t xpiritbv/dapr-demo-orderapi:$GITHUB_RUN_ID \
+                     -t xpiritbv/dapr-demo-orderapi:latest
+        docker push xpiritbv/dapr-demo-orderapi:$GITHUB_RUN_ID
+        docker push xpiritbv/dapr-demo-orderapi:latest
+      

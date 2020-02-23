@@ -1,0 +1,29 @@
+name: ordergenerator-ci
+
+on:
+  push:
+    paths: 
+    - 'OrderApp/OrderGenerator/**'
+    - '.github/workflows/ordergenerator-ci.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Docker Login
+      uses: Azure/docker-login@v1
+      with:
+        username: ${{ secrets.DOCKERUSER }}
+        password: ${{ secrets.DOCKERPW }}
+
+    - name: Build & Push the Docker image
+      run: |
+        docker build OrderApp \
+                     -f OrderApp/OrderGenerator/Dockerfile \
+                     -t xpiritbv/dapr-demo-ordergenerator:$GITHUB_RUN_ID \
+                     -t xpiritbv/dapr-demo-ordergenerator:latest
+        docker push xpiritbv/dapr-demo-ordergenerator:$GITHUB_RUN_ID
+        docker push xpiritbv/dapr-demo-ordergenerator:latest
+      
