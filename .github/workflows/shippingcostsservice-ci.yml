@@ -15,8 +15,8 @@ jobs:
     - name: Docker Login
       uses: Azure/docker-login@v1
       with:
-        username: $(DOCKERUSER)
-        password: $(DOCKERPW)
+        username: ${{DOCKERUSER}}
+        password: ${{DOCKERPW}}
 
     - name: Build & Push the Docker image
       run: |
