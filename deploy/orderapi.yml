@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: nodeapp
+  labels:
+    app: node
+spec:
+  selector:
+    app: orderapi
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderapi
+  labels:
+    app: orderapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orderapi
+  template:
+    metadata:
+      labels:
+        app: orderapi
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: "orderapi"
+        dapr.io/port: "80"
+    spec:
+      containers:
+      - name: node
+        image: docker push xpiritbv/dapr-demo-orderapi:43981656
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
