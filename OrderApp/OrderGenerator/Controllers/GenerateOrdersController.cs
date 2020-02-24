@@ -21,7 +21,7 @@ namespace OrderGenerator.Controllers
         public GenerateOrdersController()
         {
             _daprPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
-            _invokeServiceUrl = $"http://localhost:3500/v1.0/invoke/orderapp/method/orders";
+            _invokeServiceUrl = $"http://localhost:3500/v1.0/invoke/orderapi/method/orders";
 
             _serviceInvokeClient = new HttpClient();
         }
