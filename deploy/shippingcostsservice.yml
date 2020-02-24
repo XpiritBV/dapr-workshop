@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: orderapi
+  name: shippingcostsservice
   labels:
-    app: orderapi
+    app: shippingcostsservice
 spec:
   selector:
-    app: orderapi
+    app: shippingcostsservice
   ports:
   - protocol: TCP
     port: 80
@@ -17,29 +17,26 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orderapi
+  name: shippingcostsservice
   labels:
-    app: orderapi
+    app: shippingcostsservice
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: orderapi
+      app: shippingcostsservice
   template:
     metadata:
       labels:
-        app: orderapi
+        app: shippingcostsservice
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/id: "orderapi"
+        dapr.io/id: "shippingcostsservice"
         dapr.io/port: "80"
     spec:
       containers:
-      - name: orderapi
-        image: xpiritbv/dapr-demo-orderapi:44561989
-        env:
-        - name: DAPR_HTTP_PORT
-          value: "3500"
+      - name: shippingcostsservice
+        image: xpiritbv/dapr-demo-shippingcostsservice:43980340
         ports:
         - containerPort: 80
         imagePullPolicy: Always

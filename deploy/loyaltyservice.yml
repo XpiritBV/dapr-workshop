@@ -1,12 +1,12 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: orderapi
+  name: loyaltyservice
   labels:
-    app: orderapi
+    app: loyaltyservice
 spec:
   selector:
-    app: orderapi
+    app: loyaltyservice
   ports:
   - protocol: TCP
     port: 80
@@ -17,29 +17,26 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orderapi
+  name: loyaltyservice
   labels:
-    app: orderapi
+    app: loyaltyservice
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: orderapi
+      app: loyaltyservice
   template:
     metadata:
       labels:
-        app: orderapi
+        app: loyaltyservice
       annotations:
         dapr.io/enabled: "true"
-        dapr.io/id: "orderapi"
+        dapr.io/id: "loyaltyservice"
         dapr.io/port: "80"
     spec:
       containers:
-      - name: orderapi
-        image: xpiritbv/dapr-demo-orderapi:44561989
-        env:
-        - name: DAPR_HTTP_PORT
-          value: "3500"
+      - name: loyaltyservice
+        image: xpiritbv/dapr-demo-loyaltyservice:43980337
         ports:
         - containerPort: 80
         imagePullPolicy: Always
