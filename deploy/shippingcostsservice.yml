@@ -9,7 +9,7 @@ spec:
     app: shippingcostsservice
   ports:
   - protocol: TCP
-    port: 80
+    port: 8380
     targetPort: 80
   type: LoadBalancer
 
@@ -33,6 +33,7 @@ spec:
         dapr.io/enabled: "true"
         dapr.io/id: "shippingcostsservice"
         dapr.io/port: "80"
+        dapr.io/config: "tracing"
     spec:
       containers:
       - name: shippingcostsservice
