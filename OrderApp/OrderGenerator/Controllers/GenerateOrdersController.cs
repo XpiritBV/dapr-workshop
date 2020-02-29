@@ -33,7 +33,13 @@ namespace OrderGenerator.Controllers
 
             for (int i = 1; i <= number; i++)
             {
-                Order order = new Order() { Id = i, CustomerId = "Dapr", ShippingDate = DateTime.Now };
+                Order order = new Order()
+                { 
+                    Id = i, 
+                    CustomerId = $"Dapr{i}", 
+                    ShippingDate = DateTime.Now, 
+                    LoyaltyBonus = (i % 2 == 0 ? true : false) 
+                };
                 var result = await _serviceInvokeClient.PutAsJsonAsync($"{_invokeServiceUrl}/{i}", order);
                 Console.WriteLine($"Created order. OrderId: {order.Id} status: {result.StatusCode}");
                 orders.Add(order);
