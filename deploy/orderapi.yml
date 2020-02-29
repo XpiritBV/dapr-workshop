@@ -41,6 +41,8 @@ spec:
         env:
         - name: DAPR_HTTP_PORT
           value: "3500"
+        - name: DAPR_STATESTORE
+          value: "statestore"
         ports:
         - containerPort: 80
         imagePullPolicy: Always

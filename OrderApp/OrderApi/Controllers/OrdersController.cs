@@ -25,6 +25,7 @@ namespace OrderApi.Controllers
         public OrdersController()
         {
             _daprPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
+            _stateStoreName = Environment.GetEnvironmentVariable("DAPR_STATESTORE");
             _stateStoreUrl = $"http://localhost:{_daprPort}/v1.0/state/{_stateStoreName}";
 
             _loyaltyUrl = $"http://localhost:{_daprPort}/v1.0/invoke/loyaltyservice/method/addloyalty";
