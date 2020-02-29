@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: ordergenerator
-        image: xpiritbv/dapr-demo-ordergenerator:44557753
+        image: xpiritbv/dapr-demo-ordergenerator:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always

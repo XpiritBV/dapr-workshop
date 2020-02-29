@@ -42,8 +42,8 @@ spec:
             memory: 128Mi
             cpu: 0.1
         env:
-          - name: APPINSIGHTS_INSTRUMENTATIONKEY
-            value: 14f63f63-7917-404f-8ca0-b8162cafd038
+        - name: APPINSIGHTS_INSTRUMENTATIONKEY
+          value: "14f63f63-7917-404f-8ca0-b8162cafd038"
         ports:
         - containerPort: 55678
         imagePullPolicy: Always

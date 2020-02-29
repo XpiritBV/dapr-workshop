@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: orderapi
-        image: xpiritbv/dapr-demo-orderapi:44561989
+        image: xpiritbv/dapr-demo-orderapi:latest
         env:
         - name: DAPR_HTTP_PORT
           value: "3500"

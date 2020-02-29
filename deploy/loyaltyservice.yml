@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: loyaltyservice
-        image: xpiritbv/dapr-demo-loyaltyservice:43980337
+        image: xpiritbv/dapr-demo-loyaltyservice:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always

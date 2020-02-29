@@ -35,7 +35,7 @@ namespace OrderGenerator.Controllers
             {
                 Order order = new Order() { Id = i, CustomerId = "Dapr", ShippingDate = DateTime.Now };
                 var result = await _serviceInvokeClient.PutAsJsonAsync($"{_invokeServiceUrl}/{i}", order);
-                Console.WriteLine($"Created order. status: {result.StatusCode}");
+                Console.WriteLine($"Created order. OrderId: {order.Id} status: {result.StatusCode}");
                 orders.Add(order);
             }
 

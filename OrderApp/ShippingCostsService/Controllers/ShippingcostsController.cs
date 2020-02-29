@@ -11,9 +11,9 @@ namespace ShippingCostsService.Controllers
     [ApiController]
     public class ShippingcostsController : ControllerBase
     {
-        // GET: Shippingcosts
-        [HttpGet]
-        public async Task<ActionResult<double>> Get()
+        // GET: Shippingcosts/1
+        [HttpGet("{id}")]
+        public async Task<ActionResult<double>> Get(int id)
         {
             var r = new Random().Next(5);
             if (r == 1)

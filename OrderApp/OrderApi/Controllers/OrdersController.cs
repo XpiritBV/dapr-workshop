@@ -27,7 +27,7 @@ namespace OrderApi.Controllers
             _daprPort = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT");
             _stateStoreUrl = $"http://localhost:{_daprPort}/v1.0/state/{_stateStoreName}";
 
-            _loyaltyUrl = $"http://localhost:{_daprPort}/v1.0/invoke/loyaltyservice/method/shippingcosts";
+            _loyaltyUrl = $"http://localhost:{_daprPort}/v1.0/invoke/loyaltyservice/method/addloyalty";
             _shippingCostsServiceUrl = $"http://localhost:{_daprPort}/v1.0/invoke/shippingcostsservice/method/shippingcosts";
 
             _httpClient = new HttpClient();
@@ -74,14 +74,14 @@ namespace OrderApi.Controllers
             List<OrderState> stateList = new List<OrderState>();
             stateList.Add(state);
 
-            //if (order.LoyaltyBonus)
-            //{
-            //    //call loyalty service to add loyalty bonus
-            //    var loyalty = await _httpClient.PostAsJsonAsync(_loyaltyUrl, order);
-            //}
+            if (order.LoyaltyBonus)
+            {
+                //call loyalty service to add loyalty bonus
+                var loyalty = await _httpClient.PostAsJsonAsync(_loyaltyUrl, order);
+            }
 
-            //var shippingCostResult = await _httpClient.GetStringAsync($"{_shippingCostsServiceUrl}/{order.Id}");
-            //order.ShippingCosts = double.Parse(shippingCostResult);
+            var shippingCostResult = await _httpClient.GetStringAsync($"{_shippingCostsServiceUrl}/{order.Id}");
+            order.ShippingCosts = double.Parse(shippingCostResult);
 
             var result = await _httpClient.PostAsJsonAsync(_stateStoreUrl, stateList);
 

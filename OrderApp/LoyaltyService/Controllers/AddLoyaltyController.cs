@@ -16,7 +16,7 @@ namespace LoyaltyService.Controllers
         [HttpPost()]
         public async Task<ActionResult<bool>> AddLoyalty(Order order)
         {
-            await Task.Delay(new Random().Next(5000));
+            await Task.Delay(new Random().Next(2000));
             return true;
         }
     }

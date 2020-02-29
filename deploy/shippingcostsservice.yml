@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: shippingcostsservice
-        image: xpiritbv/dapr-demo-shippingcostsservice:43980340
+        image: xpiritbv/dapr-demo-shippingcostsservice:latest
         ports:
         - containerPort: 80
         imagePullPolicy: Always
