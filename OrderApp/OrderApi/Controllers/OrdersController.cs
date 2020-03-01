@@ -20,6 +20,7 @@ namespace OrderApi.Controllers
         private string _loyaltyUrl;
         private string _shippingCostsServiceUrl;
         private string _stateStoreName = "statestore";
+        private string _shippingPublishMessageUrl;
         HttpClient _httpClient;
 
         public OrdersController()
@@ -30,6 +31,8 @@ namespace OrderApi.Controllers
 
             _loyaltyUrl = $"http://localhost:{_daprPort}/v1.0/invoke/loyaltyservice/method/addloyalty";
             _shippingCostsServiceUrl = $"http://localhost:{_daprPort}/v1.0/invoke/shippingcostsservice/method/shippingcosts";
+
+            _shippingPublishMessageUrl = $"http://localhost:{_daprPort}/v1.0/publish/ShipOrders";
 
             _httpClient = new HttpClient();
         }
@@ -85,6 +88,9 @@ namespace OrderApi.Controllers
             order.ShippingCosts = double.Parse(shippingCostResult);
 
             var result = await _httpClient.PostAsJsonAsync(_stateStoreUrl, stateList);
+
+
+            var publishResult = await _httpClient.PostAsJsonAsync(_shippingPublishMessageUrl, order);
 
             return order;
         }
