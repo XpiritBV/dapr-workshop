@@ -8,7 +8,7 @@ spec:
   - name: url
     value: https://dapr-app.documents.azure.com:443/
   - name: masterKey
-    value: eReqj0l09XPNbTKnd1erarhfxx1jvWlOuiSkYyy91AMRoZ0hK4KzKUrJCf0WYrbLox3bpTtJIdHBVfmvzKGkpg==
+    value: <INSERTKEY HERE>
   - name: database
     value: OrderApp
   - name: collection
