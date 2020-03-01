@@ -11,7 +11,6 @@ using OrderApp.Model;
 
 namespace ShippingService.Controllers
 {
-    [Route("[controller]")]
     [ApiController]
     public class ShipOrdersController : ControllerBase
     {
@@ -31,7 +30,7 @@ namespace ShippingService.Controllers
         [Route("ShipOrders")]
         public async Task<ActionResult> Post([FromBody]Order order)
         {
-            Console.WriteLine($"Successfully received order with Id: {order.Id}, Customer {order.CustomerId}, Shipping date: {order.ShippingDate}");
+            Console.WriteLine($"Successfully received order with Id: {order.Id}, Customer {order.CustomerId}");
             return Ok();
         }
     }
