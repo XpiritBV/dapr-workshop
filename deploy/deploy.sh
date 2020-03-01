@@ -1,34 +1,53 @@
-kubectl config set-context --current --namespace= dapr-demoapp
+kubectl config set-context --namespace dapr-demoapp
 
-##State store
-kubectl apply -f ./deploy/redis.yml -n dapr-demoapp
+#kubectl proxy 
+#http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=default
 
-#SETUP dapr tracing
+############
+## DAPR
+############
 
-kubectl apply -f ./deploy/dist-tracing/dapr-tracing.yaml -n dapr-demoapp
+#https://raw.githubusercontent.com/dapr/dashboard/master/deploy/dashboard.yaml
+kubectl apply -f ./deploy/dapr/dashboard.yml -n dapr
 
-# Dapr Tracing to Application Insights
-kubectl apply -f ./deploy/dist-tracing/localforwarder-deployment.yaml -n dapr-demoapp
-kubectl apply -f ./deploy/dist-tracing/dapr-tracing-exporterAzure.yaml  -n dapr-demoapp
+############
+## DAPR-DEMOAPP
+############
 
-# Dapr Tracing to Zipkin
-kubectl apply -f ./deploy/dist-tracing/dapr-tracing-exporterzipkin.yaml -n dapr-demoapp
-# Dapr Tracing to Jaeger
+kubectl apply -f ./deploy/dapr-demoapp/shippingcostsservice.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/loyaltyservice.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/orderapi.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/ordergenerator.yml -n dapr-demoapp
 
-kubectl proxy 
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/#/overview?namespace=default
+kubectl delete --all pods --namespace=dapr-demoapp
 
+############
+## STATE-DEMO
+############
 
-#install dashboard
-kubectl apply -f https://raw.githubusercontent.com/dapr/dashboard/master/deploy/dashboard.yaml
+kubectl apply -f ./deploy/dapr-demoapp/state-redis.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/state-cosmosdb.yml -n dapr-demoapp
 
-#
-kubectl apply -f ./deploy/state-cosmosdb.yml -n dapr-demoapp
+############
+## TRACING-DEMO
+############
 
+kubectl apply -f ./deploy/dapr-demoapp/dapr/dapr-tracing-exporterAzure.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/dapr/dapr-tracing-exporterjaegerzipkin.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/dapr/dapr-tracing-exporterzipkin.yml -n dapr-demoapp
 
-#install all pods
+kubectl apply -f ./deploy/tracing-demo/ai-localforwarder.yml -n tracing-demo
 
-kubectl apply -f ./deploy/shippingcostsservice.yml -n dapr-demoapp
-kubectl apply -f ./deploy/loyaltyservice.yml -n dapr-demoapp
-kubectl apply -f ./deploy/orderapi.yml -n dapr-demoapp
-kubectl apply -f ./deploy/ordergenerator.yml -n dapr-demoapp
+kubectl apply -f ./deploy/tracing-demo/zipkin-deployment.yml -n tracing-demo
+
+#deploy jaeger operator
+#https://github.com/jaegertracing/jaeger-operator 
+
+kubectl create namespace observability
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/crds/jaegertracing.io_jaegers_crd.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/service_account.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/role_binding.yaml
+kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/operator.yaml
+
+kubectl apply -f ./deploy/tracing-demo/jaegersimplest.yml -n observability

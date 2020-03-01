@@ -17,7 +17,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: default
-  namespace: default
+  namespace: dapr-demoapp
 roleRef:
   kind: ClusterRole
   name: deployment-reader

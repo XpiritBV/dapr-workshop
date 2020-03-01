@@ -8,4 +8,4 @@ spec:
   - name: enabled
     value: "true"
   - name: agentEndpoint
-    value: "ai-local-forwarder:55678"
+    value: "ai-local-forwarder.tracing-demo.svc.cluster.local:55678"
