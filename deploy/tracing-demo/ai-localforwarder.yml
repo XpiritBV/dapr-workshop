@@ -34,13 +34,6 @@ spec:
       containers:
       - name: ai-local-forwarder
         image: m009/ai-local-forwarder:latest
-        resources:
-          limits:
-            memory: 512Mi
-            cpu: 0.2
-          requests:
-            memory: 128Mi
-            cpu: 0.1
         env:
         - name: APPINSIGHTS_INSTRUMENTATIONKEY
           value: "14f63f63-7917-404f-8ca0-b8162cafd038"

@@ -14,9 +14,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderGenerator", "OrderGene
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Order.Model", "Order.Model\Order.Model.csproj", "{E1AFA0E8-6B9B-4738-A9D4-2129AFA29152}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoyaltyService", "LoyaltyService\LoyaltyService.csproj", "{91D1067F-9B52-481D-9367-C40BF0DA2CE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoyaltyService", "LoyaltyService\LoyaltyService.csproj", "{91D1067F-9B52-481D-9367-C40BF0DA2CE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingCostsService", "ShippingCostsService\ShippingCostsService.csproj", "{629593C9-9B33-4110-9580-92AE3C39DBDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingCostsService", "ShippingCostsService\ShippingCostsService.csproj", "{629593C9-9B33-4110-9580-92AE3C39DBDB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingService", "ShippingService\ShippingService.csproj", "{B8BFDF4C-D892-4D53-B77B-2E256F2A6B7E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,6 +46,10 @@ Global
 		{629593C9-9B33-4110-9580-92AE3C39DBDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{629593C9-9B33-4110-9580-92AE3C39DBDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{629593C9-9B33-4110-9580-92AE3C39DBDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8BFDF4C-D892-4D53-B77B-2E256F2A6B7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8BFDF4C-D892-4D53-B77B-2E256F2A6B7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8BFDF4C-D892-4D53-B77B-2E256F2A6B7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8BFDF4C-D892-4D53-B77B-2E256F2A6B7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
