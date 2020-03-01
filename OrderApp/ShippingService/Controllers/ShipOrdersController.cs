@@ -28,7 +28,8 @@ namespace ShippingService.Controllers
         // Post: ShipOrders
         [Topic("ShipOrders")]
         [HttpPost]
-        public async Task<ActionResult> PostShipOrders(Order order)
+        [Route("ShipOrders")]
+        public async Task<ActionResult> Post([FromBody]Order order)
         {
             Console.WriteLine($"Successfully received order with Id: {order.Id}, Customer {order.CustomerId}, Shipping date: {order.ShippingDate}");
             return Ok();
