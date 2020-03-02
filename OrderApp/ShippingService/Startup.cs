@@ -38,6 +38,8 @@ namespace ShippingService
 
             app.UseRouting();
 
+            //use cloud events
+            app.UseCloudEvents();
 
             app.UseEndpoints(endpoints =>
             {
@@ -46,9 +48,6 @@ namespace ShippingService
 
                 endpoints.MapControllers();
             });
-
-            //use cloud events
-            app.UseCloudEvents();
         }
     }
 }
