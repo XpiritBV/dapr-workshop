@@ -41,4 +41,4 @@ POST http://localhost:3500/v1.0/publish/ShipOrders
 GET http://localhost:5000/dapr/subscribe
 
 
-dapr publish --topic A --payload '{ "message": "This is a test" }'
+dapr publish --topic "ShipOrders" --payload '{"id": 1,"customerId": "customer"}'

@@ -34,6 +34,7 @@ spec:
         dapr.io/id: "shippingcostsservice"
         dapr.io/port: "80"
         dapr.io/config: "tracing"
+        dapr.io/log-level: "debug"
     spec:
       containers:
       - name: shippingcostsservice

@@ -1,0 +1,14 @@
+{
+  "name": "shippingservice-node",
+  "version": "1.0.0",
+  "description": "Shipping Service showing of Pub Sub of Dapr",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Geert van der Cruijsen",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
