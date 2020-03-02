@@ -1,0 +1,47 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: shippingservice-node
+  labels:
+    app: shippingservice-node
+spec:
+  selector:
+    app: shippingservice-node
+  ports:
+  - protocol: TCP
+    port: 8480
+    targetPort: 3000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shippingservice-node
+  labels:
+    app: shippingservice-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shippingservice-node
+  template:
+    metadata:
+      labels:
+        app: shippingservice-node
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: "shippingservice-node"
+        dapr.io/port: "3000"
+        dapr.io/config: "tracing"
+        dapr.io/log-level: "debug"
+    spec:
+      containers:
+      - name: shippingservice-node
+        image: xpiritbv/dapr-demo-shippingservice-node:latest
+        env:
+        - name: DAPR_HTTP_PORT
+          value: "3500"
+        ports:
+        - containerPort: 3000
+        imagePullPolicy: Always
