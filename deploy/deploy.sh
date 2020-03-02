@@ -18,6 +18,7 @@ kubectl apply -f ./deploy/dapr-demoapp/shippingcostsservice.yml -n dapr-demoapp
 kubectl apply -f ./deploy/dapr-demoapp/loyaltyservice.yml -n dapr-demoapp
 kubectl apply -f ./deploy/dapr-demoapp/orderapi.yml -n dapr-demoapp
 kubectl apply -f ./deploy/dapr-demoapp/ordergenerator.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/shippingservice.yml -n dapr-demoapp
 
 kubectl delete --all pods --namespace=dapr-demoapp
 
@@ -25,8 +26,8 @@ kubectl delete --all pods --namespace=dapr-demoapp
 ## STATE-DEMO
 ############
 
-kubectl apply -f ./deploy/dapr-demoapp/state-redis.yml -n dapr-demoapp
-kubectl apply -f ./deploy/dapr-demoapp/state-cosmosdb.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/dapr/state-redis.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/dapr/state-cosmosdb.yml -n dapr-demoapp
 
 ############
 ## TRACING-DEMO
@@ -51,3 +52,10 @@ kubectl create -n observability -f https://raw.githubusercontent.com/jaegertraci
 kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/master/deploy/operator.yaml
 
 kubectl apply -f ./deploy/tracing-demo/jaegersimplest.yml -n observability
+
+
+############
+## PUBSUB-DEMO
+############
+
+kubectl apply -f ./deploy/dapr-demoapp/dapr/pubsub-redis.yml -n dapr-demoapp

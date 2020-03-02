@@ -9,3 +9,36 @@ GET http://51.145.187.29/FrontEnd/serviceB
 GET http://51.145.187.29/FrontEnd/serviceC
 
 
+####
+
+POST http://localhost:5000/ShipOrders
+Content-Type: application/json
+
+{
+    "id": 5,
+    "customId": "customer"
+}
+
+
+##########
+POST http://localhost:3500/v1.0/publish/ShipOrders
+
+{
+   "id":"88d480fd-3891-4adb-99be-b3180a6a8df8",
+   "source":"pubsub",
+   "type":"com.dapr.event.sent",
+   "specversion":"0.3",
+   "datacontenttype":"application/json",
+   "data":
+    {
+        "id": 1,
+        "customerId": "customer"
+    }
+}
+
+#####
+
+GET http://localhost:5000/dapr/subscribe
+
+
+dapr publish --topic A --payload '{ "message": "This is a test" }'
