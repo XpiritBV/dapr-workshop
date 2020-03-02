@@ -1,4 +1,4 @@
-name: shippingservice-ci
+name: shippingservice-node-ci
 
 on:
   push:

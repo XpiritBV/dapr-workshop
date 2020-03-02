@@ -19,6 +19,7 @@ kubectl apply -f ./deploy/dapr-demoapp/loyaltyservice.yml -n dapr-demoapp
 kubectl apply -f ./deploy/dapr-demoapp/orderapi.yml -n dapr-demoapp
 kubectl apply -f ./deploy/dapr-demoapp/ordergenerator.yml -n dapr-demoapp
 kubectl apply -f ./deploy/dapr-demoapp/shippingservice.yml -n dapr-demoapp
+kubectl apply -f ./deploy/dapr-demoapp/shippingservice-node.yml -n dapr-demoapp
 
 kubectl delete --all pods --namespace=dapr-demoapp
 

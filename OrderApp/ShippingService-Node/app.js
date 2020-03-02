@@ -9,12 +9,12 @@ const port = 3000;
 
 app.get('/dapr/subscribe', (_req, res) => {
     res.json([
-        'ShipOrder'
+        'ShipOrders'
     ]);
 });
 
-app.post('/ShipOrder', (req, res) => {
-    console.log("ShipOrder: ", req.body);
+app.post('/ShipOrders', (req, res) => {
+    console.log("ShipOrders: ", req.body);
     res.sendStatus(200);
 });
 
