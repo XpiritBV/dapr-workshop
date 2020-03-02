@@ -9,7 +9,7 @@ spec:
     app: shippingservice-node
   ports:
   - protocol: TCP
-    port: 8480
+    port: 8580
     targetPort: 3000
   type: LoadBalancer
 

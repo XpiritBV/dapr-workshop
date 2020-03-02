@@ -20,7 +20,7 @@ jobs:
 
     - name: Build & Push the Docker image
       run: |
-        docker build OrderApp \
+        docker build OrderApp/ShippingService-Node \
                      -f OrderApp/ShippingService-Node/Dockerfile \
                      -t xpiritbv/dapr-demo-shippingservice-node:$GITHUB_RUN_ID \
                      -t xpiritbv/dapr-demo-shippingservice-node:latest
